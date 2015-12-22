@@ -62,8 +62,13 @@ module.exports = _.merge({
              * You should update this section with some test input for testing your module
              */
             input: {
-                //Replace VAR1 with the name of an expected input, and add more inputs as needed.
-                VAR1: 'foo'
+                id: '2414183',
+                comment: 'A comment by the member to associated with the share.',
+                content_title: 'The title of the content being shared.',
+                content_description: 'The description of the content being shared.',
+                content_url: 'https://developer.linkedin.com/docs/share-on-linkedin',
+                content_image_url: 'https://lh6.googleusercontent.com/-sg8NbkEL5sE/AAAAAAAAAAI/AAAAAAAAABU/RREqfaagyN8/photo.jpg',
+                visibility_code: 'anyone'
             }
         }
     }

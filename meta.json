@@ -4,23 +4,47 @@
 {
     //Required. Inputs the module expects.
     "inputs": [
-        //e.g.
-        /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "id",
+            "title": "Company ID"
+        },
+        {
+            "id": "comment",
+            "title":"Comment"
+        },
+        {
+            "id": "content_title",
+            "title":"Title"
+        },
+        {
+            "id": "content_description",
+            "title":"Description"
+        },
+        {
+            "id": "content_url",
+            "title":"URL"
+        },
+        {
+            "id": "content_image_url",
+            "title":"Image URL"
+        },
+        {
+            "id": "visibility_code",
+            "title":"Visibility"
         }
-        */
     ],
     //Required. Outputs the module emits.
     "outputs": [
-      //e.g.
-      /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "updateKey",
+            "title":"Key"
+        },
+        {
+            "id": "updateUrl",
+            "title":"URL"
         }
-      */
     ],
-    "title": "LinkedIn Create Company Post" /* Required.A display name for the module */
+    "icon": "linkedin",
+    /* Required.A display name for the module */
+    "title": "LinkedIn Create Company Post"
 }
