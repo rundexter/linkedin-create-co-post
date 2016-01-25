@@ -44,7 +44,12 @@
             "title":"URL"
         }
     ],
+    "providers": [{
+        "name": "linkedin",
+        "scopes": [
+            "rw_company_admin"
+        ]
+    }],
     "icon": "linkedin",
-    /* Required.A display name for the module */
     "title": "LinkedIn Create Company Post"
 }
