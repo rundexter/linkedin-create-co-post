@@ -4,7 +4,7 @@ var _ = require('lodash')
 
 module.exports = _.merge({
     /*
-     * Some default settings. 
+     * Some default settings.
      *
      * You can generally leave this as is for general testing purposes.
      */
@@ -47,7 +47,7 @@ module.exports = _.merge({
     }
     , user: {
         /*
-         * Your dexter user settings should go in the env.js file and remain uncommitted.  
+         * Your dexter user settings should go in the env.js file and remain uncommitted.
          * For example:
          *
         profile: {
@@ -62,13 +62,10 @@ module.exports = _.merge({
              * You should update this section with some test input for testing your module
              */
             input: {
-                id: '2414183',
-                comment: 'A comment by the member to associated with the share.',
-                content_title: 'The title of the content being shared.',
-                content_description: 'The description of the content being shared.',
-                content_url: 'https://developer.linkedin.com/docs/share-on-linkedin',
-                content_image_url: 'https://lh6.googleusercontent.com/-sg8NbkEL5sE/AAAAAAAAAAI/AAAAAAAAABU/RREqfaagyN8/photo.jpg',
-                visibility_code: 'anyone'
+                id: [ '6648092' ],
+                title: ['This is a title of a thing', 'Here is another title of a thing' ],
+                description: ['The description of the content being shared.', 'another description' ],
+                url: [ 'https://developer.linkedin.com/docs/share-on-linkedin', 'https://rundexter.com/' ]
             }
         }
     }

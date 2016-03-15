@@ -20,31 +20,36 @@ module.exports = {
         var image_url    = step.input( 'image_url' ).toArray();
         var visibility   = step.input( 'visibility_code' ).toArray();
 
-
-        var linkedIn = Linkedin.init(dexter.provider('linkedin').credentials('access_token')),
-            inputs = util.pickStringInputs(step, pickInputs),
-            validateErrors = util.checkValidateErrors(inputs, pickInputs);
-
-        if (validateErrors)
-            return this.fail(validateErrors);
-
-        self.log( 'token = ' + dexter.provider('linkedin').credentials('access_token'));
+        var linkedIn = Linkedin.init(dexter.provider('linkedin').credentials('access_token'));
 
         var posts = [ ];
+        var self = this;
 
-        _.zipWith( comment, title, description, url, image_url, visibility, function( c, t, d, u, iu, v ) {
-            return { comment: c, title: t, description: d, url: u, image_url: ui, visibility: v
-        } } ).forEach( function( item ) {
+        description.forEach( function( desc, idx ) {
             var deferred = q.defer();
-            linkedIn.companies.share( company_id, item, function( err, data ) {
-                if ( err ) return deferred.reject( error );
+            var share = {
+                comment: comment[ idx ] || null,
+                content: {
+                    title: title[ idx ] || null,
+                    description: desc,
+                    'submitted-url': url[ idx ] || null,
+                    'submitted-image-url': image_url[ idx ] || null,
+                },
+                visibility: {
+                    code: visibility[ idx ] || 'anyone'
+                }
+            };
+
+            linkedIn.companies.share( company_id, share, function( err, data ) {
+                if ( err || (data && data.errorCode !== undefined) )
+                    return deferred.reject( err || (data.message || 'Error Code: '.concat(data.errorCode)));
+
                 return deferred.resolve( data )
             } );
+
+            posts.push( deferred.promise );
         } );
 
-        posts.push( deferred.promise );
-
-        var self = this;
         q.all( posts )
             .then( function( res ) { return self.complete( res ) } )
             .fail( function( err ) { return self.fail( err ) } );
