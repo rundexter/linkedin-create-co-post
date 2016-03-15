@@ -2,7 +2,6 @@
  * Metadata describing the module operation
  */
 {
-    //Required. Inputs the module expects.
     "inputs": [
         {
             "id": "id",
@@ -13,19 +12,19 @@
             "title":"Comment"
         },
         {
-            "id": "content_title",
+            "id": "title",
             "title":"Title"
         },
         {
-            "id": "content_description",
+            "id": "description",
             "title":"Description"
         },
         {
-            "id": "content_url",
+            "id": "url",
             "title":"URL"
         },
         {
-            "id": "content_image_url",
+            "id": "image_url",
             "title":"Image URL"
         },
         {
@@ -33,7 +32,6 @@
             "title":"Visibility"
         }
     ],
-    //Required. Outputs the module emits.
     "outputs": [
         {
             "id": "updateKey",

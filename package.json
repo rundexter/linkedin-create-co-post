@@ -1,17 +1,17 @@
 {
-   "name": "linkedin-create-company-post",
-   "version": "0.0.1",
-   "description": "Returns a list of videos that match the API request parameters",
-   "main": "index.js",
-   "author": "Run Dexter, Inc",
-   "license": "MIT",
-   "private": true,
-   "dependencies": {
-      "lodash": "^3.10.1",
-      "node-linkedin": "^0.5.3"
-   },
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/rundexter/linkedin-create-co-post"
-   }
+  "name": "linkedin-create-company-post",
+  "version": "0.0.1",
+  "description": "Returns a list of videos that match the API request parameters",
+  "main": "index.js",
+  "author": "Run Dexter, Inc",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "node-linkedin": "^0.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rundexter/linkedin-create-co-post"
+  }
 }

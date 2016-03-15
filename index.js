@@ -1,20 +1,8 @@
 var Linkedin = require('node-linkedin')(),
     _ = require('lodash'),
+    q = require('q'),
     util = require('./util.js');
 
-var pickInputs = {
-        'id': { key: 'id', validate: { req: true } },
-        'comment': 'comment',
-        'content_title': 'content.title',
-        'content_description': 'content.description',
-        'content_url': 'content.submitted-url',
-        'content_image_url': 'content.submitted-image-url',
-        'visibility_code': 'visibility.code'
-    },
-    pickOutputs = {
-        'updateKey': 'updateKey',
-        'updateUrl': 'updateUrl'
-    };
 
 module.exports = {
     /**
@@ -24,6 +12,15 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
+        var company_id   = step.input( 'id' ).first();
+        var comment      = step.input( 'company' ).toArray();
+        var title        = step.input( 'title' ).toArray();
+        var description  = step.input( 'description' ).toArray();
+        var url          = step.input( 'url' ).toArray();
+        var image_url    = step.input( 'image_url' ).toArray();
+        var visibility   = step.input( 'visibility_code' ).toArray();
+
+
         var linkedIn = Linkedin.init(dexter.provider('linkedin').credentials('access_token')),
             inputs = util.pickStringInputs(step, pickInputs),
             validateErrors = util.checkValidateErrors(inputs, pickInputs);
@@ -31,12 +28,25 @@ module.exports = {
         if (validateErrors)
             return this.fail(validateErrors);
 
-        linkedIn.companies.share(inputs.id, _.omit(inputs, ['id']), function(err, data) {
-            if (err || (data && data.errorCode !== undefined))
-                this.fail(err || (data.message || 'Error Code: '.concat(data.errorCode)));
-            else
-                this.complete(util.pickOutputs(data, pickOutputs));
+        self.log( 'token = ' + dexter.provider('linkedin').credentials('access_token'));
 
-        }.bind(this));
+        var posts = [ ];
+
+        _.zipWith( comment, title, description, url, image_url, visibility, function( c, t, d, u, iu, v ) {
+            return { comment: c, title: t, description: d, url: u, image_url: ui, visibility: v
+        } } ).forEach( function( item ) {
+            var deferred = q.defer();
+            linkedIn.companies.share( company_id, item, function( err, data ) {
+                if ( err ) return deferred.reject( error );
+                return deferred.resolve( data )
+            } );
+        } );
+
+        posts.push( deferred.promise );
+
+        var self = this;
+        q.all( posts )
+            .then( function( res ) { return self.complete( res ) } )
+            .fail( function( err ) { return self.fail( err ) } );
     }
 };
