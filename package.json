@@ -1,7 +1,7 @@
 {
   "name": "linkedin-create-company-post",
   "version": "0.0.1",
-  "description": "Returns a list of videos that match the API request parameters",
+  "description": "Create a post on behalf of a company",
   "main": "index.js",
   "author": "Run Dexter, Inc",
   "license": "MIT",
